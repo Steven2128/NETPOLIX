@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  postgres-db:
+    image: postgres
+    container_name: postgres-db
+    volumes:
+      - .:/app
+    environment:
+      - POSTGRES_DB=netpolix
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+  app-web:
+    build: .
+    container_name: app-web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DB=netpolix
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres-db
+    depends_on:
+      - postgres-db
