@@ -15,5 +15,5 @@ router.register('collection', CollectionModelViewSet, basename='collection')
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
