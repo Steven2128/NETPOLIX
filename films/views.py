@@ -1,3 +1,5 @@
+# Django
+from django.views.generic import TemplateView, DetailView
 # DRF
 from rest_framework import viewsets
 # Models
@@ -9,6 +11,9 @@ from .serializers import *
 class FilmModelViewSet(viewsets.ModelViewSet):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
@@ -34,3 +39,24 @@ class SerieModelViewSet(viewsets.ModelViewSet):
 class CollectionModelViewSet(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
+
+
+class FilmsTemplateView(TemplateView):
+    template_name = 'films/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FilmsTemplateView, self).get_context_data(**kwargs)
+        # here's the difference:
+        context['films'] = Film.objects.all()
+        return context
+
+
+class FilmsDetailView(DetailView):
+    model = Film
+    template_name = 'films/anime-details.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    query_pk_and_slug = True
+
+    def get_object(self, **kwargs):
+        return Film.objects.get(slug=self.kwargs['slug'])

@@ -1,4 +1,5 @@
 # Django
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.text import slugify
 
@@ -50,8 +51,10 @@ class Film(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Categoría')
     language = models.ManyToManyField(Language, related_name='film_language', verbose_name='Idiomas')
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, verbose_name='Clasificación')
-    image_thumbnail = models.ImageField(upload_to='films/', null=True, blank=True, verbose_name="Miniatura")
-    film_url = models.URLField(max_length=150, null=False, blank=False, verbose_name='Url de la película')
+    image_thumbnail = models.ImageField(upload_to='films/img/', null=True, blank=True, verbose_name="Foto Miniatura")
+    review_short = models.TextField(blank=True, null=True, verbose_name='Argumento corto')
+    # film_url = models.URLField(max_length=150, null=False, blank=False, verbose_name='Url de la película')
+    film = models.FileField(upload_to='films/', null=False, blank=False, validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])], default='films/default.mp4', verbose_name='Película')
     actor = models.CharField(max_length=250, null=False, blank=False, verbose_name='Actores')
     slug = models.SlugField(unique=True, blank=True, null=True)
 
@@ -63,7 +66,7 @@ class Film(models.Model):
     def __str__(self):
         return "{} {}".format(self.title, self.year)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Film, self).save(*args, **kwargs)
 

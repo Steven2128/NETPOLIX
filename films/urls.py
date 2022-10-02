@@ -16,4 +16,6 @@ router.register('collection', CollectionModelViewSet, basename='collection')
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('', FilmsTemplateView.as_view(), name='film-list'),
+    path('videos/<slug:slug>/', FilmsDetailView.as_view(), name='film-detail'),
 ]
