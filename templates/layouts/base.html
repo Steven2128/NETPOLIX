@@ -32,6 +32,7 @@
 </div>
 
 <!-- Header Section Begin -->
+{% if request.user.is_authenticated %}
 <header class="header">
     <div class="container">
         <div class="row">
@@ -73,11 +74,14 @@
         <div id="mobile-menu-wrap"></div>
     </div>
 </header>
+{% endif %}
 <!-- Header End -->
 
 <div class="content">
     {% block content %}{% endblock content %}
 </div>
+
+{% if request.user.is_authenticated %}
 <!-- Footer Section Begin -->
 <footer class="footer">
     <div class="page-up">
@@ -123,6 +127,7 @@
     </div>
 </div>
 <!-- Search model end -->
+{% endif %}
 
 <!-- Js Plugins -->
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>

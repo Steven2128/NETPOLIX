@@ -1,4 +1,5 @@
 # Django
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, DetailView
 # DRF
 from rest_framework import viewsets
@@ -41,7 +42,7 @@ class CollectionModelViewSet(viewsets.ModelViewSet):
     serializer_class = CollectionSerializer
 
 
-class FilmsTemplateView(TemplateView):
+class FilmsTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'films/index.html'
 
     def get_context_data(self, **kwargs):

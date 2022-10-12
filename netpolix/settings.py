@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'crispy_forms',
     'drf_yasg',
     'users',
     'films',
@@ -143,4 +144,14 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = ['netpolix.backends.EmailOrUsernameModelBackend']
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+AUTH_AUTHENTICATION_TYPE = 'both'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_URL='/login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login'
