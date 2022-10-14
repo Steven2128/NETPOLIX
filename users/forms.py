@@ -1,7 +1,10 @@
 # Django
 from django import forms
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+# Models
+from .models import *
+
 
 class SignupForm(forms.ModelForm):
     """Form Signup"""
@@ -27,6 +30,7 @@ class SignupForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.username = user.email
+        user.is_client = True
         user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()

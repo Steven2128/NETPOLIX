@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'users',
     'films',
+    'pqrs',
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,8 @@ AUTHENTICATION_BACKENDS = ['netpolix.backends.EmailOrUsernameModelBackend']
 CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_AUTHENTICATION_TYPE = 'both'
+
+AUTH_USER_MODEL = 'users.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

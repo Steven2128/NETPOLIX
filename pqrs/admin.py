@@ -1,6 +1,6 @@
 # Django
 from django.contrib import admin
 # Models
-from .models import *
+from .models import PQR
 
-admin.site.register(User)
+admin.site.register(PQR)

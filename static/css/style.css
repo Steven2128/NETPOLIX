@@ -1646,6 +1646,12 @@ ol {
 	margin-bottom: 26px;
 }
 
+.blog__details__form h5 {
+	color: #ffffff;
+	font-weight: 500;
+	margin-bottom: 26px;
+}
+
 .blog__details__form form input {
 	height: 50px;
 	width: 100%;
