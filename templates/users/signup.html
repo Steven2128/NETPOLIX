@@ -74,13 +74,13 @@
                                 </div>
                                 <div class="col">
                                     <div class="input__item">
-                                        <input type="password" placeholder="Contraseña" name="password" class="form-control{% if form.password.errors %} is-invalid{% endif %}" required>
-                                        <span class="icon_lock"></span>
-                                        {% if form.password.errors %}
+                                        <input type="text" placeholder="Identificación" name="identification" class="form-control{% if form.identification.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_chat"></span>
+                                        {% if form.identification.errors %}
                                             <div class="invalid-feedback">
-                                            {% for error in form.password.errors %}
-                                              {{ error|escape }}
-                                            {% endfor %}
+                                                {% for error in form.identification.errors %}
+                                                    {{ error|escape }}
+                                                {% endfor %}
                                             </div>
                                         {% endif %}
                                     </div>
@@ -89,7 +89,20 @@
                             <div class="form-row">
                                 <div class="col">
                                     <div class="input__item">
-                                        <input type="text" placeholder="Código de referencia (opcional)" name="code" class="form-control{% if form.code.errors %} is-invalid{% endif %}" required>
+                                        <input type="password" placeholder="Contraseña" name="password" class="form-control{% if form.password.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_lock"></span>
+                                        {% if form.password.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.password.errors %}
+                                                    {{ error|escape }}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input__item">
+                                        <input type="text" placeholder="Código de referencia (opcional)" name="code" class="form-control{% if form.code.errors %} is-invalid{% endif %}">
                                         <span class="icon_lock"></span>
                                         {% if form.code.errors %}
                                             <div class="invalid-feedback">

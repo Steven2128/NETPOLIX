@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 # Models
 from .models import *
 # Forms
@@ -21,3 +21,10 @@ class PQRCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.client = self.request.user
         return super().form_valid(form)
+
+
+class PQRListView(SuccessMessageMixin, LoginRequiredMixin, ListView):
+    """PQR Create View"""
+    model = PQR
+    template_name = 'pqrs/PQRList.html'
+    queryset = 'pqrs'

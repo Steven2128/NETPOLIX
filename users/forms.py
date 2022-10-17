@@ -11,20 +11,26 @@ class SignupForm(forms.ModelForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
-    code = forms.CharField(required=False)
+    code = forms.CharField(required=False, )
+    identification = forms.IntegerField(min_value=0)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'password', 'code']
+        fields = ['first_name', 'last_name', 'email', 'identification', 'password', 'code']
         widgets = {
             'password': forms.PasswordInput()
         }
 
     def clean(self):
         email = self.cleaned_data.get('email')
+        identification = self.cleaned_data.get('identification')
         if User.objects.filter(email=email).exists():
             # Verifica si ya existe un usuario con ese email
             raise ValidationError({'email': ["Ya existe un usuario con ese correo"]})
+        # if User.objects.filter(identification=identification).exists():
+        #     # Verifica si ya existe un usuario con esa identificación
+        #     raise ValidationError({'identification': ["Ya existe un usuario con esa identificación"]})
+        print(self.errors)
         return self.cleaned_data
 
     def save(self, commit=True):
@@ -33,7 +39,7 @@ class SignupForm(forms.ModelForm):
         user.is_client = True
         user.set_password(self.cleaned_data['password'])
         # Si ingresa un código de referencia
-        if user.code is not None:
+        if user.code:
             # Encuentra el cliente asociado al código y le suma un punto
             client = User.objects.filter(code=user.code).first()
             client.current_points += 1
