@@ -1,5 +1,8 @@
 # Django
+import secrets
+
 from django.contrib.auth.models import User, AbstractUser
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
 
@@ -9,7 +12,9 @@ class User(AbstractUser):
     is_employee = models.BooleanField(default=False, verbose_name='¿Es empleado?')
     is_administrator = models.BooleanField(default=False, verbose_name='¿Es administrador?')
     identification = models.CharField(max_length=20, blank=False, null=False, verbose_name='Identificación')
+    code = models.CharField(max_length=50, blank=False, null=False, unique=True, verbose_name='Codigo promocional')
     current_points = models.PositiveIntegerField(blank=False, null=False, default=0, verbose_name='Puntos acumulados')
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images', validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bpm', 'jpeg', 'jpe'])])
 
     def __str__(self):
         return "{} - {}".format(self.get_full_name(), self.email)

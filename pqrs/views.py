@@ -1,4 +1,5 @@
 # Django
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -9,7 +10,7 @@ from .models import *
 from .forms import *
 
 
-class PQRCreateView(SuccessMessageMixin, CreateView):
+class PQRCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """PQR Create View"""
     model = PQR
     template_name = 'pqrs/PQRForm.html'

@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Perfil {% endblock %}
+{% block css %}
+    <style>
+    .image-upload>input {
+      display: none;
+    }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+    <!-- Signup Section Begin -->
+    <section class="signup spad">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-6 offset-1">
+                        <div class="">
+                            <h3>Perfil</h3>
+                            <p>Tu codigo de refencia es: <strong>{{ request.user.code }}</strong></p>
+                            <p>Tus puntos actuales: <strong class="text-success">{{ request.user.current_points }}</strong></p>
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="input__item">
+                                            {{ u_form.first_name|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input__item">
+                                            {{ u_form.last_name|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        {{ u_form.email|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="site-btn"><i class="fa fa-check"></i>Guardar</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="login__register">
+                            <div class="image-upload">
+                              <label for="file-input"><img src="{{ request.user.avatar.url }}" class="img-responsive  text-center" /></label>
+                              <input id="file-input" type="file" name="avatar"/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Signup Section End -->
+
+{% endblock content %}

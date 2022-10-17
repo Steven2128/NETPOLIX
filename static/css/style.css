@@ -436,6 +436,18 @@ ol {
 .slicknav_menu {
 	display: none;
 }
+/*---------------------
+  Label, p, h3
+-----------------------*/
+label {
+	color: #ffffff;
+}
+p {
+	color: #ffffff;
+}
+h2, h3, h4 {
+	color: #ffffff;
+}
 
 /*---------------------
   Hero

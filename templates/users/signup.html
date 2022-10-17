@@ -25,56 +25,82 @@
     <section class="signup spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 offset-1">
+                <div class="col">
                     <div class="login__form">
                         <h3>Registro</h3>
                         <form method="post">
                             {% csrf_token %}
-                            <div class="input__item">
-                                <input type="text" placeholder="Correo electrónico" name="email" class="form-control{% if form.email.errors %} is-invalid{% endif %}" required>
-                                <span class="icon_mail"></span>
-                                {% if form.email.errors %}
-                                    <div class="invalid-feedback">
-                                      {% for error in form.email.errors %}
-                                        {{ error|escape }}
-                                      {% endfor %}
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="input__item">
+                                        <input type="text" placeholder="Correo electrónico" name="email" class="form-control{% if form.email.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_mail"></span>
+                                        {% if form.email.errors %}
+                                            <div class="invalid-feedback">
+                                              {% for error in form.email.errors %}
+                                                {{ error|escape }}
+                                              {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Nombres" name="first_name" class="form-control{% if form.first_name.errors %} is-invalid{% endif %}" required>
-                                <span class="icon_profile"></span>
-                                {% if form.first_name.errors %}
-                                    <div class="invalid-feedback">
-                                      {% for error in form.first_name.errors %}
-                                        {{ error|escape }}
-                                      {% endfor %}
+                                </div>
+                                <div class="col">
+                                    <div class="input__item">
+                                        <input type="text" placeholder="Nombres" name="first_name" class="form-control{% if form.first_name.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_profile"></span>
+                                        {% if form.first_name.errors %}
+                                            <div class="invalid-feedback">
+                                              {% for error in form.first_name.errors %}
+                                                {{ error|escape }}
+                                              {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                {% endif %}
+                                </div>
                             </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Apellidos" name="last_name" class="form-control{% if form.last_name.errors %} is-invalid{% endif %}" required>
-                                <span class="icon_profile"></span>
-                                {% if form.last_name.errors %}
-                                    <div class="invalid-feedback">
-                                      {% for error in form.last_name.errors %}
-                                        {{ error|escape }}
-                                      {% endfor %}
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="input__item">
+                                        <input type="text" placeholder="Apellidos" name="last_name" class="form-control{% if form.last_name.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_profile"></span>
+                                        {% if form.last_name.errors %}
+                                            <div class="invalid-feedback">
+                                              {% for error in form.last_name.errors %}
+                                                {{ error|escape }}
+                                              {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                            </div>
-                            <div class="input__item">
-                                <input type="password" placeholder="Contraseña" name="password" class="form-control{% if form.password.errors %} is-invalid{% endif %}" required>
-                                <span class="icon_lock"></span>
-                                {% if form.password.errors %}
-                                    <div class="invalid-feedback">
-                                    {% for error in form.password.errors %}
-                                      {{ error|escape }}
-                                    {% endfor %}
+                                </div>
+                                <div class="col">
+                                    <div class="input__item">
+                                        <input type="password" placeholder="Contraseña" name="password" class="form-control{% if form.password.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_lock"></span>
+                                        {% if form.password.errors %}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.password.errors %}
+                                              {{ error|escape }}
+                                            {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                {% endif %}
+                                </div>
                             </div>
-
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="input__item">
+                                        <input type="text" placeholder="Código de referencia (opcional)" name="code" class="form-control{% if form.code.errors %} is-invalid{% endif %}" required>
+                                        <span class="icon_lock"></span>
+                                        {% if form.code.errors %}
+                                            <div class="invalid-feedback">
+                                            {% for error in form.code.errors %}
+                                              {{ error|escape }}
+                                            {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="site-btn">Registrame</button>
                         </form>
                     </div>

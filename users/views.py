@@ -1,11 +1,12 @@
 # Django
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 # Forms
-from users.forms import SignupForm
+from users.forms import SignupForm, ProfileForm
 
 
 class LoginView(LoginView):
@@ -17,6 +18,7 @@ class LoginView(LoginView):
             return redirect('/')
         self.object = None
         return super().get(request, *args, **kwargs)
+
 
 class SignupView(CreateView):
     """Signup View"""
@@ -30,3 +32,28 @@ class SignupView(CreateView):
             return redirect('/')
         self.object = None
         return super().get(request, *args, **kwargs)
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        user_form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        # profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        # if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
+            user_form.save()
+            # profile_form.save()
+            # messages.success(request, 'Cuenta actualizada exitosamente!')
+            return redirect('profile')
+    else:
+        user_form = ProfileForm(instance=request.user)
+        # pro = Profile.objects.filter(user_id=request.user.id)
+        # if not pro:
+        #     profile = Profile(user=request.user)
+        #     profile.save()
+    context = {
+        'u_form': user_form,
+    }
+
+    return render(request, 'users/profile.html', context)

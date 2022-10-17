@@ -52,7 +52,7 @@ class FilmsTemplateView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class FilmsDetailView(DetailView):
+class FilmsDetailView(LoginRequiredMixin, DetailView):
     model = Film
     template_name = 'films/anime-details.html'
     slug_field = 'slug'

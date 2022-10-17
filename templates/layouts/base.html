@@ -24,6 +24,14 @@
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+    {% block css %}
+    {% endblock css %}
+
 </head>
 <body>
 <!-- Page Preloder -->
@@ -68,7 +76,8 @@
             <div class="col-lg-2">
                 <div class="header__right">
                     <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                    <a href="./login.html"><span class="icon_profile"></span></a>
+                    <a href="{% url 'profile' %}" title="Perfil"><span class="icon_profile"></span></a>
+                    <a href="{% url 'logout' %}" title="Salir"><i class="fa fa-sign-out"></i></a>
                 </div>
             </div>
         </div>
