@@ -22,6 +22,12 @@ class LanguageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ActorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Actor
+        fields = '__all__'
+
+
 class ClassificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Classification

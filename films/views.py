@@ -34,6 +34,12 @@ class LanguageModelViewSet(viewsets.ModelViewSet):
     serializer_class = LanguageSerializer
 
 
+class ActorModelViewSet(viewsets.ModelViewSet):
+    """Language Model View Set"""
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializer
+
+
 class ClassificationModelViewSet(viewsets.ModelViewSet):
     """Clasification Model View Set"""
     queryset = Classification.objects.all()

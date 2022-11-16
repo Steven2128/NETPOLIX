@@ -9,4 +9,5 @@ admin.site.register(Language)
 admin.site.register(Classification)
 admin.site.register(Serie)
 admin.site.register(Collection)
+admin.site.register(Actor)
 
