@@ -4,6 +4,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
+# DRF
+from rest_framework import viewsets
+# Serializers
+from .serializers import PQRSerializer
 # Models
 from .models import *
 # Forms
@@ -28,3 +32,9 @@ class PQRListView(SuccessMessageMixin, LoginRequiredMixin, ListView):
     model = PQR
     template_name = 'pqrs/PQRList.html'
     queryset = 'pqrs'
+
+
+class PQRModelViewSet(viewsets.ModelViewSet):
+    """PQR Model View Set"""
+    queryset = PQR.objects.all()
+    serializer_class = PQRSerializer

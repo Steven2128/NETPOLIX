@@ -20,5 +20,5 @@ class PQR(models.Model):
         return "{} - {}".format(self.get_request_type_display(), self.client.get_full_name())
 
     class Meta:
-        verbose_name = 'PQR'
-        verbose_name_plural = 'PQRs'
+        verbose_name = 'Pregunta, Queja y Reclamo'
+        verbose_name_plural = 'Preguntas, Quejas y Reclamos'

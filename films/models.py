@@ -42,6 +42,18 @@ class Language(models.Model):
         return self.language
 
 
+class Actor(models.Model):
+    """Model Actor"""
+    full_name = models.CharField(max_length=70, blank=False, null=False, verbose_name='Nombre completo')
+
+    class Meta:
+        verbose_name = "Actor"
+        verbose_name_plural = 'Actores'
+
+    def __str__(self):
+        return self.full_name
+
+
 class Film(models.Model):
     """Model Film"""
     title = models.CharField(max_length=150, blank=False, null=False, verbose_name='Titulo original')
@@ -55,7 +67,7 @@ class Film(models.Model):
     review_short = models.TextField(blank=True, null=True, verbose_name='Argumento corto')
     # film_url = models.URLField(max_length=150, null=False, blank=False, verbose_name='Url de la película')
     film = models.FileField(upload_to='films/', null=False, blank=False, validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])], default='films/default.mp4', verbose_name='Película')
-    actor = models.CharField(max_length=250, null=False, blank=False, verbose_name='Actores')
+    actors = models.ManyToManyField(Actor, related_name="film_actor", verbose_name="Actores")
     slug = models.SlugField(unique=True, blank=True, null=True)
 
     class Meta:

@@ -5,8 +5,12 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+# DRF
+from rest_framework import viewsets
+# Serializers
+from .serializers import *
 # Forms
-from users.forms import SignupForm, ProfileForm
+from .forms import SignupForm, ProfileForm
 
 
 class LoginView(LoginView):
@@ -57,3 +61,9 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+
+class UserModelViewSet(viewsets.ModelViewSet):
+    """User Model View Set"""
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

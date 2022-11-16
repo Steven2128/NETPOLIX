@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users',
     'films',
     'pqrs',
+    'transactions'
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-co'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 
@@ -158,3 +159,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL='/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login'
+
+APPEND_SLASH = False

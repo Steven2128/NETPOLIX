@@ -71,9 +71,13 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn">
+                                {% if transaction_buy == 1 %}
+                                    <a href="#" class="follow-btn"><span><i class="fa fa-eye"></i> Watch Now</span></a>
+                                {% else %}
+                                    <a href="{% url 'buy-film' film.slug %}" class="follow-btn"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                                    <a href="{% url 'rent-film' film.slug %}" class="follow-btn"><i class="fa fa-clock-o"></i> Alquilar</a>
+                                {% endif %}
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="#" class="watch-btn"><span>Watch Now</span> <i
-                                    class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
