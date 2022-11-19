@@ -66,7 +66,7 @@ class Film(models.Model):
     image_thumbnail = models.ImageField(upload_to='films/img/', null=True, blank=True, verbose_name="Foto Miniatura")
     review_short = models.TextField(blank=True, null=True, verbose_name='Argumento corto')
     # film_url = models.URLField(max_length=150, null=False, blank=False, verbose_name='Url de la película')
-    film = models.FileField(upload_to='films/', null=False, blank=False, validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])], default='films/default.mp4', verbose_name='Película')
+    movie = models.FileField(upload_to='films/', null=False, blank=False, validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])], default='films/default.mp4', verbose_name='Película')
     actors = models.ManyToManyField(Actor, related_name="film_actor", verbose_name="Actores")
     slug = models.SlugField(unique=True, blank=True, null=True)
 
