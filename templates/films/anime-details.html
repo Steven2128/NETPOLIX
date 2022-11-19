@@ -71,13 +71,16 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn">
-                                {% if transaction_buy == 1 %}
-                                    <a href="#" class="follow-btn"><span><i class="fa fa-eye"></i> Watch Now</span></a>
+                                {% if transaction_buy == 1 or transaction_rent_able == False %}
+
+                                    <a href="#" class="follow-btn"><span><i class="fa fa-eye"></i> Ver Ahora</span></a>
+                                    {% if transaction_rent_able == False %}
+                                    <span class="text-white">Podrás visualizar este titulo hasta: <span class="text-danger">{{ transaction_rent.end_time_rent }}</span></span>
+                                    {% endif %}
                                 {% else %}
-                                    <a href="{% url 'buy-film' film.slug %}" class="follow-btn"><i class="fa fa-shopping-cart"></i> Comprar</a>
-                                    <a href="{% url 'rent-film' film.slug %}" class="follow-btn"><i class="fa fa-clock-o"></i> Alquilar</a>
+                                    <a href="{% url 'buy-film' film.slug %}" class="follow-btn"><i class="fa fa-shopping-cart"></i> Comprar $0</a>
+                                    <a href="{% url 'rent-film' film.slug %}" class="follow-btn"><i class="fa fa-clock-o"></i> Alquilar $0</a>
                                 {% endif %}
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
                                 </div>
                             </div>
                         </div>

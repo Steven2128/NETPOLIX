@@ -9,5 +9,6 @@ router = DefaultRouter()
 router.register('', UserModelViewSet, basename='user')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('popular/', UsersWithMoreTransactions.as_view(), name='users_popular')
 ]

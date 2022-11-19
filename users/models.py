@@ -15,6 +15,7 @@ class User(AbstractUser):
     code = models.CharField(max_length=50, blank=False, null=False, unique=True, verbose_name='Codigo promocional')
     current_points = models.PositiveIntegerField(blank=False, null=False, default=0, verbose_name='Puntos acumulados')
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images', validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'bpm', 'jpeg', 'jpe'])])
+    amount_transactions = models.PositiveIntegerField(default=0, verbose_name="Cantidad de transacciones")
 
     def __str__(self):
         return "{} - {}".format(self.get_full_name(), self.email)

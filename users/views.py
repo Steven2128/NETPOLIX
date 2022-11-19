@@ -1,16 +1,19 @@
 # Django
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 # DRF
 from rest_framework import viewsets
+from rest_framework.generics import ListAPIView
 # Serializers
 from .serializers import *
 # Forms
 from .forms import SignupForm, ProfileForm
+# Models Transactions
+from transactions.models import Transaction
 
 
 class LoginView(LoginView):
@@ -67,3 +70,12 @@ class UserModelViewSet(viewsets.ModelViewSet):
     """User Model View Set"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class UsersWithMoreTransactions(viewsets.generics.ListAPIView):
+    """
+    Lista los 10 usuarios que más transacciones han realizado
+    """
+    queryset = User.objects.all().order_by('-amount_transactions')[:10]
+    serializer_class = UserSerializer
+

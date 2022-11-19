@@ -10,5 +10,5 @@ router.register('', PQRModelViewSet, basename='pqr')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('create/', PQRCreateView.as_view(), name='pqr_index'),
+    # path('create/', PQRCreateView.as_view(), name='pqr_index'),
 ]

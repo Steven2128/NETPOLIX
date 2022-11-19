@@ -9,7 +9,8 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 # Users Views
 from users.views import *
-
+# PQR Views
+from pqrs.views import PQRCreateView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('films.urls')),
     path('pqr/', include('pqrs.urls')),
+    path('pqr-create/', PQRCreateView.as_view(), name='pqr_create'),
     path('users/', include('users.urls')),
     path('transactions/', include('transactions.urls')),
     path('login/', LoginView.as_view(), name='login'),

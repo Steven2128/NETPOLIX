@@ -2,7 +2,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, DetailView
 # DRF
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 # Models
 from .models import *
 # Models transactions
@@ -86,7 +86,12 @@ class FilmsDetailView(LoginRequiredMixin, DetailView):
         context['films'] = Film.objects.filter(slug=self.slug_url_kwarg)
         context['transaction_buy'] = Transaction.objects.filter(film=self.get_object(), client=self.request.user, type_transaction='C').count()
         transaction_rent = Transaction.objects.filter(film=self.get_object(), client=self.request.user, type_transaction='A').last()
-        if transaction_rent > datetime.now():
-            context['transaction_rent'] = True
-        context['transaction_rent'] = False
+        try:
+            if datetime.strptime(datetime.now().strftime('%Y-%m-%d'), '%Y-%m-%d').date() >= transaction_rent.end_time_rent:
+                context['transaction_rent_able'] = True
+            else:
+                context['transaction_rent_able'] = False
+                context['transaction_rent'] = transaction_rent
+        except Exception as Ex:
+            print(Ex)
         return context
