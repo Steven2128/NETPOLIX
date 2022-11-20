@@ -25,18 +25,14 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Iniciar Sesión</h3>
+                        {% if form.errors %}
+                            <span class="text-danger">Credenciales incorrectas</span>
+                        {% endif %}
                         <form method="post">
                             {% csrf_token %}
                             <div class="input__item">
                                 <input type="text" placeholder="Correo electrónico" name="username" class="form-control{% if form.username.errors %} is-invalid{% endif %}" required>
                                 <span class="icon_mail"></span>
-                                {% if form.username.errors %}
-                                    <div class="invalid-feedback">
-                                    {% for error in form.username.errors %}
-                                      {{ error|escape }}
-                                    {% endfor %}
-                                    </div>
-                                {% endif %}
                             </div>
                             <div class="input__item">
                                 <input type="password" placeholder="Contraseña" name="password" class="form-control{% if form.username.errors %} is-invalid{% endif %}" required>
