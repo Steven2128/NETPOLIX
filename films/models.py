@@ -39,7 +39,7 @@ class Language(models.Model):
         verbose_name_plural = 'Idiomas'
 
     def __str__(self):
-        return self.language
+        return "{} {}".format(self.language, self.type)
 
 
 class Actor(models.Model):
@@ -88,6 +88,8 @@ class Serie(models.Model):
     title = models.CharField(max_length=150, blank=False, null=False, verbose_name='Titulo original')
     season = models.PositiveIntegerField(blank=False, null=False, default=0, verbose_name='Temporada')
     fimls = models.ManyToManyField(Film, related_name='fimls_serie', verbose_name='Peliculas')
+    image_thumbnail = models.ImageField(upload_to='series/img/', null=True, blank=True, verbose_name="Foto Miniatura")
+    slug = models.SlugField(unique=True, blank=True, null=True)
 
     class Meta:
         verbose_name = "Serie"
@@ -96,6 +98,10 @@ class Serie(models.Model):
 
     def __str__(self):
         return "{} - Temporada: {}".format(self.title, self.season)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Serie, self).save(*args, **kwargs)
 
 
 class Collection(models.Model):

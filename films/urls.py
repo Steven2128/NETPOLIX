@@ -19,4 +19,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('', FilmsTemplateView.as_view(), name='film-list'),
     path('videos/<slug:slug>/', FilmsDetailView.as_view(), name='film-detail'),
+    path('idioma-original/', FilmsOriginLanguageView.as_view(), name='film-original-languages'),
+    path('idioma-subtitulado/', FilmsSubtitledLanguageView.as_view(), name='film-subtitled-languages'),
+    path('idioma-doblado/', FilmsDubbedLanguageView.as_view(), name='film-dubbed-languages'),
+    path('series/', SeriesTemplateView.as_view(), name='serie-list'),
+    path('chaper/list/<slug:slug>/', ChaptersListView.as_view(), name='chapter-list'),
 ]

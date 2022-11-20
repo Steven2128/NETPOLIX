@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-lg-2">
                 <div class="header__logo">
-                    <a href="./index.html">
+                    <a href="/">
                         <img src="{% static 'img/logo.png' %}" alt="">
                     </a>
                 </div>
@@ -56,18 +56,15 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a href="/">Homepage</a></li>
-                            <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                            <li><a href="/">Peliculas <span class="arrow_carrot-down"></span></a>
                                 <ul class="dropdown">
-                                    <li><a href="./categories.html">Categories</a></li>
-                                    <li><a href="./anime-details.html">Anime Details</a></li>
-                                    <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                    <li><a href="./signup.html">Sign Up</a></li>
-                                    <li><a href="./login.html">Login</a></li>
+                                    <li><a href="./categories.html"></a></li>
+                                    <li><a href="{% url 'film-original-languages' %}">Idioma Original</a></li>
+                                    <li><a href="{% url 'film-dubbed-languages' %}">Idioma Doblado</a></li>
+                                    <li><a href="{% url 'film-subtitled-languages' %}">Idioma Subtitulado</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
+                            <li><a href="{% url 'serie-list' %}">Series</a></li>
                             <li><a href="{% url 'pqr_create' %}">PQR</a></li>
                         </ul>
                     </nav>

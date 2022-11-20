@@ -11,8 +11,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="./categories.html">Categories</a>
-                        <span>Romance</span>
+                        <a href="#" disabled="true">Categorías</a>
+                        <span>{{ film.category }}</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <div class="anime__details__text">
                             <div class="anime__details__title">
                                 <h3>{{ film.title }}</h3>
-                                <span>フェイト／ステイナイト, Feito／sutei naito</span>
+                                <span>{{ film.ISAN }}</span>
                             </div>
                             <div class="anime__details__rating">
                                 <div class="rating">
@@ -52,9 +52,9 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Type:</span> TV Series</li>
-                                            <li><span>Studios:</span> Lerche</li>
-                                            <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
+                                            <li><span>Año publicación:</span> {{ film.year }}</li>
+                                            <li><span>Duración:</span> {{ film.duration }} minutos</li>
+                                            <li><span>Idiomas:</span> {{ film.language }}</li>
                                             <li><span>Status:</span> Airing</li>
                                             <li><span>Genre:</span> Action, Adventure, Fantasy, Magic</li>
                                         </ul>
