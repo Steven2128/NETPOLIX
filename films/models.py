@@ -94,6 +94,7 @@ class Serie(models.Model):
     fimls = models.ManyToManyField(Film, related_name='fimls_serie', verbose_name='Peliculas')
     image_thumbnail = models.ImageField(upload_to='series/img/', null=True, blank=True, verbose_name="Foto Miniatura")
     slug = models.SlugField(unique=True, blank=True, null=True)
+    main_character = models.CharField(max_length=150, blank=True, null=True, verbose_name='Prsonaje principal')
 
     class Meta:
         verbose_name = "Serie"
