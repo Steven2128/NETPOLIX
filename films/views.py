@@ -2,8 +2,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, DetailView, ListView
 # DRF
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, status
 # Models
+from rest_framework.response import Response
+
+import films
 from .models import *
 # Models transactions
 from transactions.models import *
@@ -64,8 +67,12 @@ class FilmsTemplateView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(FilmsTemplateView, self).get_context_data(**kwargs)
-        # here's the difference:
-        context['films'] = Film.objects.all()
+        films = []
+        for film in Film.objects.all():
+            if Serie.objects.filter(fimls=film):
+                continue
+            films.append(film)
+        context['films'] = films
         return context
 
 
@@ -103,8 +110,12 @@ class FilmsOriginLanguageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(FilmsOriginLanguageView, self).get_context_data(**kwargs)
-        # here's the difference:
-        context['films'] = Film.objects.filter(language__type__contains="Original")
+        films = []
+        for film in Film.objects.filter(language__type__contains="Original"):
+            if Serie.objects.filter(fimls=film):
+                continue
+            films.append(film)
+        context['films'] = films
         return context
 
 
@@ -114,8 +125,12 @@ class FilmsSubtitledLanguageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(FilmsSubtitledLanguageView, self).get_context_data(**kwargs)
-        # here's the difference:
-        context['films'] = Film.objects.filter(language__type__contains="Subtitulado")
+        films = []
+        for film in Film.objects.filter(language__type__contains="Subtitulado"):
+            if Serie.objects.filter(fimls=film):
+                continue
+            films.append(film)
+        context['films'] = films
         return context
 
 
@@ -125,8 +140,12 @@ class FilmsDubbedLanguageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(FilmsDubbedLanguageView, self).get_context_data(**kwargs)
-        # here's the difference:
-        context['films'] = Film.objects.filter(language__type__contains="Doblado")
+        films = []
+        for film in Film.objects.filter(language__type__contains="Doblado"):
+            if Serie.objects.filter(fimls=film):
+                continue
+            films.append(film)
+        context['films'] = films
         return context
 
 
@@ -154,18 +173,33 @@ class ChaptersListView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ChaptersDetailView(LoginRequiredMixin, DetailView):
-    """Chapters List View"""
-    model = Serie
-    template_name = 'films/chapter-list.html'
+
+class GetActorByFullName(viewsets.generics.RetrieveAPIView):
+    """Obtiene un actor por su nombre completo"""
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializer
+    lookup_field = "full_name"
+
+    def get(self, request, full_name):
+        try:
+            obj = Actor.objects.get(full_name=full_name.title())
+            return Response(ActorSerializer(obj).data)
+        except Exception as ex:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class FilmWatching(DetailView):
+    """Mostrar contenido de una pelicula"""
+    model = Film
+    template_name = 'films/anime-watching.html'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     query_pk_and_slug = True
 
     def get_object(self, **kwargs):
-        return Serie.objects.get(slug=self.kwargs['slug'])
+        return Film.objects.get(slug=self.kwargs['slug'])
 
     def get_context_data(self, **kwargs):
-        context = super(ChaptersListView, self).get_context_data(**kwargs)
-        context['chapters'] = Film.objects.filter(slug=self.slug_url_kwarg)
+        context = super(FilmWatching, self).get_context_data(**kwargs)
+        context['serie'] = Serie.objects.filter(fimls=self.get_object()).first()
         return context

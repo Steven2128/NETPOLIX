@@ -53,6 +53,10 @@ class Actor(models.Model):
     def __str__(self):
         return self.full_name
 
+    def save(self, *args, **kwargs):
+        self.full_name = self.full_name.title()
+        super(Actor, self).save(*args, **kwargs)
+
 
 class Film(models.Model):
     """Model Film"""

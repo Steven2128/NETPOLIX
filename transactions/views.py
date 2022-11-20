@@ -21,7 +21,7 @@ def buy_film(request, title):
         user = User.objects.filter(pk=request.user.pk).first()
         user.amount_transactions += 1
         user.save()
-        messages.success(request, "¡Compra realizada con exito!")
+        messages.success(request, "¡Compra realizada con exito! Disfruta la pelicula :)")
     return redirect('film-detail', title)
 
 
@@ -34,7 +34,7 @@ def rent_film(request, title):
         user = User.objects.filter(pk=request.user.pk).first()
         user.amount_transactions += 1
         user.save()
-        messages.success(request, "¡Alquiler realizado con exito! \n Puedes visualizar esta pelicula hasta: " + transaction.end_time_rent.strftime('%Y/%m/%d'))
+        messages.success(request, "¡Alquiler realizado con exito! Recuerda que puedes visualizar esta pelicula hasta el: " + transaction.end_time_rent.strftime('%Y/%m/%d'))
 
     return redirect('film-detail', title)
 

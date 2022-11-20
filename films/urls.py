@@ -24,4 +24,6 @@ urlpatterns = [
     path('idioma-doblado/', FilmsDubbedLanguageView.as_view(), name='film-dubbed-languages'),
     path('series/', SeriesTemplateView.as_view(), name='serie-list'),
     path('chaper/list/<slug:slug>/', ChaptersListView.as_view(), name='chapter-list'),
+    path('actor/<str:full_name>/', GetActorByFullName.as_view(), name='get-actor'),
+    path('film/watching/<slug:slug>/', FilmWatching.as_view(), name='film-watching'),
 ]
